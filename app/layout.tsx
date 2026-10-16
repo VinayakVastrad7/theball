@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "Theball — Football, Tactics, Satire & Humor",
+    default: "Theball — Cosmic Publication",
     template: "%s | Theball",
   },
 
