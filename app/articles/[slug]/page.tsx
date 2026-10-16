@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
  
-import { getArticleBySlugFromDatabase } from "@/lib/articles";
- 
+import {
+  getArticleBySlugFromDatabase,
+  getPublishedArticlesFromDatabase,
+} from "@/lib/articles"; 
 import ArticleHeader from "@/components/articles/ArticleHeader";
 import ArticleImage from "@/components/articles/ArticleImage";
 import ArticleQuote from "@/components/articles/ArticleQuote";
@@ -19,6 +21,13 @@ type ArticlePageProps = {
     slug: string;
   }>;
 };
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const articles = await getPublishedArticlesFromDatabase();
+  return articles.map((article) => ({ slug: article.slug }));
+}
  
 export async function generateMetadata({
   params,
